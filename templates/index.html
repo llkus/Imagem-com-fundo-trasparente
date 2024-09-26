@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Remover Fundo de Imagem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Removedor de Fundo Mágico</h1>
+    <div class="icon">
+        <!-- SVG para ícone de mágica -->
+        <img src="static/assets/varinha.svg" width="80" height="80" alt="Ícone de mágica"/>
+    </div>
+    <form method="POST" action="/" enctype="multipart/form-data">
+        <input type="file" name="imagem" style="display: none;" id="upload">
+        <label for="upload">
+            <!-- Botão para abrir a caixa de diálogo de upload -->
+            <button type="button" onclick="triggerFileUpload()">
+                <!-- Ícone de upload -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="#ffffff"
+                          d="M19 9h-4V3H9v6H5l7 7 7-7zm-7 4.4l-3.6-3.6h2.6V3h2v6.8h2.6L12 13.4zM5 21h14v-2H5v2z"/>
+                </svg>
+                Carregar Imagem
+            </button>
+        </label>
+
+        <!-- Botão de envio do formulário -->
+        <button type="submit" style="margin-top: 20px;">Enviar Imagem</button>
+
+        <script>
+            // Função para simular o clique no input de arquivo
+            function triggerFileUpload() {
+                document.getElementById('upload').click();
+            }
+        </script>
+    </form>
+
+    <!-- Exibição da imagem processada -->
+    {% if imagem_processada %}
+    <div class="result">
+        <h2>Imagem Processada</h2>
+        <img src="{{ imagem_processada }}" alt="Imagem com fundo removido" style="max-width: 100%; height: auto;"/>
+        <br>
+        <a href="{{ imagem_processada }}" download="imagem_sem_fundo.png">Baixar Imagem</a>
+    </div>
+    {% endif %}
+
+    <p>Carregue uma imagem para remover o fundo de forma rápida e fácil.</p>
+</div>
+</body>
+</html>
